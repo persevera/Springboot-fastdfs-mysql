@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--上传测试-->
+<form action="/doupload" method="post" enctype="multipart/form-data">
+    选择要上传的文件<input type="file" name="myfile"/><br/>
+    文件上传后的名字<input type="text" name="newname" value=""/>
+    <input type="submit" value="上传"/>
+</form>
+<!--删除测试-->
+<form action="dodelete" method="post">
+    请输入要删除的文件id<input type="text" name="id" value=""><br/>
+    <input type="submit" value="删除"/>
+</form>
+<!--测试删除操作-->
+<form action="download" method="post">
+    请输入要删除的文件的id<input type="text" name="id" value=""/><br/>
+    <input type="submit" value="下载"/>
+</form>
+</body>
+</html>

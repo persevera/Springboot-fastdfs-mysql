@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springbootfastdfsmysql.mysql.Dao.fileinfoMapper">
+  <resultMap id="BaseResultMap" type="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="oldname" jdbcType="VARCHAR" property="oldname" />
+    <result column="newname" jdbcType="VARCHAR" property="newname" />
+    <result column="filesize" jdbcType="INTEGER" property="filesize" />
+    <result column="filepath" jdbcType="VARCHAR" property="filepath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, oldname, newname, filesize, filepath
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    insert into file (id, oldname, newname, 
+      filesize, filepath)
+    values (#{id,jdbcType=INTEGER}, #{oldname,jdbcType=VARCHAR}, #{newname,jdbcType=VARCHAR}, 
+      #{filesize,jdbcType=INTEGER}, #{filepath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="oldname != null">
+        oldname,
+      </if>
+      <if test="newname != null">
+        newname,
+      </if>
+      <if test="filesize != null">
+        filesize,
+      </if>
+      <if test="filepath != null">
+        filepath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oldname != null">
+        #{oldname,jdbcType=VARCHAR},
+      </if>
+      <if test="newname != null">
+        #{newname,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="filepath != null">
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    update file
+    <set>
+      <if test="oldname != null">
+        oldname = #{oldname,jdbcType=VARCHAR},
+      </if>
+      <if test="newname != null">
+        newname = #{newname,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        filesize = #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="filepath != null">
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    update file
+    set oldname = #{oldname,jdbcType=VARCHAR},
+      newname = #{newname,jdbcType=VARCHAR},
+      filesize = #{filesize,jdbcType=INTEGER},
+      filepath = #{filepath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectall" resultType="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    select *from file
+  </select>
+  <select id="selectbynewname" resultType="com.springbootfastdfsmysql.mysql.myclass.fileinfo">
+    select filepath from file where  newname = #{newname}
+  </select>
+  <delete id="deletefile">
+    delete *from where  id=#{id}
+  </delete>
+</mapper>
